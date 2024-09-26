@@ -8,28 +8,31 @@ def get_headers(auth_token=None):
         headers["Authorization"] = f"Bearer {auth_token}"
     return headers
 
-
 def post_new_user(body):
     headers = get_headers()
-    return requests.post(
-        configuration.URL_SERVICE + configuration.CREATE_USER_PATH,
+    url = configuration.URL_SERVICE + configuration.CREATE_USER_PATH
+    response = requests.post(
+        url,
         json=body,
         headers=headers
     )
-
+    return response
 
 def get_kits_table(auth_token):
     headers = get_headers(auth_token)
-    return requests.get(
-        configuration.URL_SERVICE + configuration.KITS_PATH,
+    url = configuration.URL_SERVICE + configuration.KITS_PATH
+    response = requests.get(
+        url,
         headers=headers
     )
-
+    return response
 
 def post_new_kit(kit_body, auth_token):
     headers = get_headers(auth_token)
-    return requests.post(
-        configuration.URL_SERVICE + configuration.KITS_PATH,
+    url = configuration.URL_SERVICE + configuration.KITS_PATH
+    response = requests.post(
+        url,
         json=kit_body,
         headers=headers
     )
+    return response
