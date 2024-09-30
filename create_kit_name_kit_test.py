@@ -38,40 +38,36 @@ def negative_assert_no_name(kit_body):
 
 # 1- El número permitido de caracteres (1)
 def test_create_1_letter_in_name_get_success_response():
-    positive_assert('a')
+    positive_assert(data.one_letter)
 
 # 2- El número permitido de caracteres (511)
 def test_create_511_letter_in_name_get_success_response():
-    text = 'AbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdAbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcD'
-    positive_assert(text)
+    positive_assert(data.max_length_name)
 
 # 3- El número de caracteres es menor que la cantidad permitida (0)
 def test_create_user_0_letter_in_name_get_error_response():
-    negative_assert_symbol('')
+    negative_assert_symbol(data.empty_name)
 
 # 4- El número de caracteres es mayor que la cantidad permitida (512)
 def test_create_user_512_letter_in_name_get_error_response():
-    text = 'AbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdAbcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcD'
-    negative_assert_symbol(text)
+    negative_assert_symbol(data.exceed_length_name)
 
 # 5- Se permiten caracteres especiales
 def test_create_user_has_special_symbol_in_name_get_success_response():
-    positive_assert('№%@')
+    positive_assert(data.special_symbols)
 
 # 6- Se permiten espacios
 def test_create_user_has_space_in_first_name_get_success_response():
-    positive_assert('A Aaa')
+    positive_assert(data.space_in_name)
 
 # 7- Se permiten números
 def test_create_user_has_number_in_name_get_success_response():
-    positive_assert('123')
+    positive_assert(data.number_in_name)
 
 # 8- El parámetro no se pasa en la solicitud
 def test_create_user_no_name_get_error_response():
-    kit_body = data.kit_body.copy()
-    kit_body.pop('name')
-    negative_assert_no_name(kit_body)
+    negative_assert_no_name(data.kit_body_without_name)
 
 # 9- Se ha pasado un tipo de parámetro diferente (número)
 def test_create_user_number_type_name_get_error_response():
-    negative_assert_symbol(123)
+    negative_assert_symbol(data.name_as_number)
